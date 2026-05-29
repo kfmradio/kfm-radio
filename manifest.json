@@ -1,0 +1,25 @@
+{
+  "name": "KFM Radio",
+  "short_name": "KFM Radio",
+  "description": "K-Pop Your Life! Free 24/7 K-Pop webradio from Switzerland.",
+  "start_url": "/kfm-radio/",
+  "scope": "/kfm-radio/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1e1f1e",
+  "theme_color": "#1e1f1e",
+  "icons": [
+    {
+      "src": "icon_fond_fonce.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon_fond_fonce.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

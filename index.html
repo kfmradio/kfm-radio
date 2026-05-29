@@ -7,7 +7,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="KFM Radio">
+<meta name="application-name" content="KFM Radio">
 <meta name="description" content="KFM Radio — K-Pop Your Life! Free 24/7 K-Pop webradio from Switzerland.">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon_fond_fonce.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <title>KFM Radio — K-Pop Your Life!</title>
@@ -20,8 +23,6 @@
   --blue-dark:#244776;
   --orange:#e58143;
   --orange-dark:#d17041;
-  --skin:#f7b8a4;
-  --skin-dark:#e6aa9a;
   --black:#1e1f1e;
   --black-deep:#010101;
   --white:#ffffff;
@@ -71,7 +72,7 @@ body{font-family:'Baloo 2',sans-serif;color:var(--white);display:flex;justify-co
 .vol-row svg{flex-shrink:0;}
 input[type=range]{flex:1;height:4px;-webkit-appearance:none;background:rgba(255,255,255,0.13);border-radius:2px;outline:none;cursor:pointer;}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--red);box-shadow:0 2px 8px rgba(207,47,59,0.5);}
-.socials{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+.socials{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;}
 .soc{width:38px;height:38px;border-radius:50%;background:var(--surface);border:1px solid var(--surface-border);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;}
 .soc:active{background:rgba(207,47,59,0.2);}
 .sec-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:14px;}
@@ -158,27 +159,24 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a0aac0" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
       </div>
       <div class="socials">
-        <!-- Facebook -->
         <a class="soc" href="https://www.facebook.com/kfmkpopyourlife" target="_blank" title="Facebook">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="#a0aac0"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
         </a>
-        <!-- Instagram -->
         <a class="soc" href="https://www.instagram.com/kfmkpopyourlife" target="_blank" title="Instagram">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="#a0aac0"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4" fill="#1e1f1e"/><circle cx="17.5" cy="6.5" r="1" fill="#1e1f1e"/></svg>
         </a>
-        <!-- TikTok -->
         <a class="soc" href="https://www.tiktok.com/@kfmkpopyourlife" target="_blank" title="TikTok">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="#a0aac0"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.78a4.85 4.85 0 01-1.01-.09z"/></svg>
         </a>
-        <!-- X / Twitter -->
         <a class="soc" href="https://x.com/kfm_radio" target="_blank" title="X / Twitter">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="#a0aac0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
-        <!-- YouTube -->
         <a class="soc" href="https://www.youtube.com/@kfm-radio" target="_blank" title="YouTube">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="#a0aac0"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#1e1f1e"/></svg>
         </a>
-        <!-- Website -->
+        <a class="soc" href="https://www.threads.com/@kfmkpopyourlife" target="_blank" title="Threads">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#a0aac0"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.474 12.01v-.02c.02-3.579.886-6.43 2.525-8.482C5.848 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.594 12c.022 3.086.713 5.496 2.051 7.164 1.43 1.781 3.63 2.695 6.54 2.717 2.628-.02 4.432-.668 5.898-2.162 1.266-1.29 1.979-3.158 2.102-5.554H12.16v-2.085h10.355c.088.56.135 1.137.135 1.705 0 3.526-.973 6.288-2.897 8.207-1.618 1.618-3.855 2.474-6.567 2.474v-.001z"/></svg>
+        </a>
         <a class="soc" href="https://www.kfm-radio.com" target="_blank" title="Website">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a0aac0" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
         </a>
@@ -316,6 +314,13 @@ function showTab(name, el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('s-'+name).classList.add('active');
   el.classList.add('active');
+}
+
+// PWA Service Worker
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
 }
 </script>
 </body>
