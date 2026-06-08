@@ -60,10 +60,12 @@
     user-select: none;
   }
 
+  /* Correction de hauteur dynamique pour les navigateurs mobiles */
   .app-window {
     width: 100%;
     max-width: 430px;
     height: 100vh;
+    height: 100dvh;
     max-height: 932px;
     background: var(--color-bg-light);
     position: relative;
