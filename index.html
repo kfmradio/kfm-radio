@@ -14,7 +14,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<!-- Version 6.5.2 pour l'affichage natif de X et Threads -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYVKVN6LBV"></script>
@@ -29,13 +28,13 @@
 
 <style>
   :root {
-    --color-primary: #cf2f3b;     /* Rouge DA */
-    --color-bg-dark: #244776;     /* Bleu Foncé DA (Header/Nav/Bouton Backstage) */
-    --color-bg-light: #4f81c2;    /* Bleu Clair DA (Corps de l'application) */
-    --color-orange: #e58143;      /* Orange DA (Sous-titre logo/Nav active) */
-    --color-orange-dark: #d17041; /* Orange Foncé DA (Cercle pointillé) */
-    --color-skin: #f7b8a4;        /* Peau DA (Barres Égaliseur) */
-    --color-text-dark: #1e1f1e;   /* Noir DA (Artiste/Titre About) */
+    --color-primary: #cf2f3b;     
+    --color-bg-dark: #244776;     
+    --color-bg-light: #4f81c2;    
+    --color-orange: #e58143;      
+    --color-orange-dark: #d17041; 
+    --color-skin: #f7b8a4;        
+    --color-text-dark: #1e1f1e;   
     --glass-bg: rgba(255, 255, 255, 0.18);
     --glass-border: rgba(255, 255, 255, 0.25);
     --glass-blur: blur(16px);
@@ -53,20 +52,19 @@
     background: var(--color-bg-dark);
     color: #ffffff;
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Aligne l'application directement en haut sur mobile */
     overflow: hidden;
     user-select: none;
   }
 
-  /* Correction de hauteur dynamique pour les navigateurs mobiles */
   .app-window {
     width: 100%;
     max-width: 430px;
     height: 100vh;
     height: 100dvh;
-    max-height: 932px;
     background: var(--color-bg-light);
     position: relative;
     display: flex;
@@ -76,14 +74,17 @@
   }
 
   @media (min-width: 480px) {
+    body {
+      align-items: center; /* Centre l'application uniquement sur ordinateur / grand écran */
+    }
     .app-window {
       height: 85vh;
+      max-height: 932px;
       border-radius: 32px;
       border: 2px solid var(--glass-border);
     }
   }
 
-  /* Header & Navigation en Bleu Foncé strict */
   .top-header {
     height: 65px;
     background: var(--color-bg-dark);
@@ -182,7 +183,6 @@
     gap: 6px;
   }
 
-  /* Pochette optimisée à 160px & Cercle Orange Foncé */
   .cover-wrapper {
     position: relative;
     width: 160px;
@@ -231,7 +231,6 @@
     text-overflow: ellipsis;
   }
 
-  /* Artiste en Noir DA pour contraste optimal */
   .track-artist {
     font-size: 1rem;
     color: var(--color-text-dark);
@@ -241,7 +240,6 @@
     text-overflow: ellipsis;
   }
 
-  /* Conteneur Égaliseur figé pour bloquer les sauts d'affichage */
   .eq-container {
     display: flex;
     align-items: flex-end;
@@ -252,7 +250,6 @@
     margin-bottom: 2px;
   }
 
-  /* Égaliseur en Peau DA */
   .eq-bar {
     width: 3px;
     height: 3px;
@@ -352,7 +349,6 @@
     cursor: pointer;
   }
 
-  /* Grille Sociale Option B */
   .social-container {
     display: flex;
     flex-direction: column;
@@ -500,7 +496,6 @@
   .top-rank.silver { background: #c0c0c0; color: #1e1f1e; }
   .top-rank.bronze { background: #cd7f32; color: #1e1f1e; }
 
-  /* PAGE ABOUT RESTAURÉE ET SUBTILEMENT CORRIGÉE */
   .about-banner {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
@@ -510,7 +505,6 @@
     margin-bottom: 14px;
   }
 
-  /* Titre About réduit et passé en Noir DA pour la lisibilité */
   .about-banner h2 {
     font-size: 1.15rem;
     color: var(--color-text-dark);
@@ -562,7 +556,6 @@
     margin-bottom: 2px;
   }
 
-  /* Boutons contrastés sur le fond clair */
   .about-btn-backstage {
     width: 100%;
     background: var(--color-bg-dark);
@@ -608,7 +601,6 @@
     transform: scale(0.98);
   }
 
-  /* Bottom Nav en Bleu Foncé strict */
   .bottom-nav {
     position: absolute;
     bottom: 0;
@@ -683,7 +675,6 @@
 
     <main class="main-container">
       
-      <!-- ÉCRAN : PLAYER (Optimisé No-Scroll total) -->
       <section class="screen active" id="s-player">
         <div class="cover-wrapper">
           <div class="cover-ring" id="ring-element"></div>
@@ -721,7 +712,6 @@
             <i class="fa-solid fa-volume-high" style="font-size:0.75rem; color:rgba(255,255,255,0.7);"></i>
           </div>
 
-          <!-- Grille Option B ordonnée -->
           <div class="social-container">
             <div class="social-row">
               <a class="social-circle" href="https://www.facebook.com/kfmkpopyourlife" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
@@ -742,7 +732,6 @@
         </div>
       </section>
 
-      <!-- ÉCRAN : RECENTLY -->
       <section class="screen" id="s-recently">
         <div class="screen-title">Recently Played</div>
         <div class="recent-list" id="recent-container">
@@ -750,7 +739,6 @@
         </div>
       </section>
 
-      <!-- ÉCRAN : TOP TRACKS -->
       <section class="screen" id="s-top">
         <div class="screen-title">Top Tracks</div>
         <div class="top-list" id="top-container">
@@ -758,7 +746,6 @@
         </div>
       </section>
 
-      <!-- ÉCRAN : ABOUT (Lien K-Backstage mis à jour et corrigé) -->
       <section class="screen" id="s-about">
         <div class="screen-title">About KFM Radio</div>
         
@@ -873,7 +860,7 @@
       eqInterval = setInterval(() => {
         bars.forEach(bar => {
           if (isPlaying) {
-            const h = Math.floor(Math.random() * 20) + 4; // Max 24px de haut
+            const h = Math.floor(Math.random() * 20) + 4;
             bar.style.height = h + 'px';
           } else {
             bar.style.height = '3px';
@@ -998,7 +985,7 @@
               <p style="font-size:0.85rem; line-height:1.4; color:rgba(255,255,255,0.9); margin-bottom:14px;">
                 Our official interactive dynamic chart module is currently undergoing an API upgrade.
               </p>
-              <a href="https://kfm-radio.com" target="_blank" style="display:inline-block; background:var(--color-bg-dark); color:white; text-decoration:none; padding:8px 16px; border-radius:20px; font-size:0.8rem; font-weight:700;">
+              <a href="https://kfm-radio.com" target="_blank" style="display:inline-block; background:var(--color-bg-dark); color:white; text-decoration:none; padding:8px 16px; border-radius:20px; font-size:0.8 gubernatorial; font-weight:700;">
                 Check Updates Website
               </a>
             </div>
