@@ -350,7 +350,7 @@
     cursor: pointer;
   }
 
-  /* BOUTONS ACTIONS VERTICAUX */
+  /* BOUTONS ACTIONS VERTICAUX CORRIGÉS (PLUS DOUX & TRANSPARENTS) */
   .action-buttons-vertical {
     display: flex;
     flex-direction: column;
@@ -360,7 +360,7 @@
 
   .btn-linktree {
     width: 100%;
-    background: var(--color-orange);
+    background: rgba(229, 129, 67, 0.85); /* Version translucide de --color-orange */
     color: #ffffff;
     border: none;
     padding: 11px;
@@ -374,13 +374,13 @@
     justify-content: center;
     gap: 8px;
     text-decoration: none;
-    box-shadow: 0 4px 12px rgba(229, 129, 67, 0.25);
+    box-shadow: 0 4px 10px rgba(229, 129, 67, 0.15);
     transition: all 0.2s ease;
   }
 
   .btn-share {
     width: 100%;
-    background: var(--color-primary);
+    background: rgba(207, 47, 59, 0.85); /* Version translucide de --color-primary */
     color: #ffffff;
     border: none;
     padding: 11px;
@@ -393,12 +393,17 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    box-shadow: 0 4px 12px rgba(207, 47, 59, 0.25);
+    box-shadow: 0 4px 10px rgba(207, 47, 59, 0.15);
     transition: all 0.2s ease;
   }
 
   .btn-linktree:active, .btn-share:active {
     transform: scale(0.98);
+    background: rgba(229, 129, 67, 0.95);
+  }
+  
+  .btn-share:active {
+    background: rgba(207, 47, 59, 0.95);
   }
 
   .toast {
@@ -711,7 +716,7 @@
             <i class="fa-solid fa-volume-high" style="font-size:0.75rem; color:rgba(255,255,255,0.7);"></i>
           </div>
 
-          <!-- SECTION DES ACTION BUTTONS MISE A JOUR -->
+          <!-- SECTION DES ACTION BUTTONS RE-AJUSTÉE -->
           <div class="action-buttons-vertical">
             <a class="btn-linktree" href="https://linktr.ee/kfmkpopyourlife" target="_blank" rel="noopener">
               <i class="fa-solid fa-heart-pulse"></i> Join Our K-Pop Community
