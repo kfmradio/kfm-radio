@@ -1,3 +1,6 @@
+// Intégration des notifications OneSignal
+importScripts('https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js');
+
 const CACHE = 'kfm-v2';
 const ASSETS = ['./'];
 
@@ -16,6 +19,11 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
+  // On laisse passer les requêtes OneSignal sans interférence du cache
+  if (e.request.url.includes('onesignal')) {
+    return;
+  }
+  
   e.respondWith(
     fetch(e.request).catch(() => caches.match(e.request))
   );
