@@ -24,19 +24,24 @@
   gtag('config','G-WYVKVN6LBV');
 </script>
 
-<!-- Connexion et Initialisation de OneSignal Push Notifications -->
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<!-- Connexion et Initialisation de OneSignal Push Notifications (Version 15 Stable) -->
+<script src="https://cdn.onesignal.com/sdks/web/v15/OneSignalSDK.js" defer></script>
 <script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
+  window.OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
       appId: "5709860f-2eab-4f03-9fb1-99715da05b17",
-      serviceWorkerPath: "sw.js"
-    });
-    
-    // Force l'affichage de la cloche d'abonnement v16
-    await OneSignal.Slidedown.promptDb({
-      force: true
+      path: "./",
+      notifyButton: {
+        enable: true,
+        size: 'medium',
+        theme: 'default',
+        position: 'bottom-right',
+        offset: {
+          bottom: '85px',
+          right: '20px'
+        }
+      }
     });
   });
 </script>
