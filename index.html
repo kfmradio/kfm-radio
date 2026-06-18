@@ -16,15 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WYVKVN6LBV"></script>
-<script>
-  window.dataLayer=window.dataLayer||[];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js',new Date());
-  gtag('config','G-WYVKVN6LBV');
-</script>
-
-<!-- OneSignal SDK corrigé (sans defer) -->
+<!-- OneSignal SDK intégré correctement -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"></script>
 <script>
   window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -33,6 +25,14 @@
       appId: "5709860f-2eab-4f03-9fb1-99715da05b17",
     });
   });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WYVKVN6LBV"></script>
+<script>
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js',new Date());
+  gtag('config','G-WYVKVN6LBV');
 </script>
 
 <title>KFM Radio — K-Pop Your Life!</title>
@@ -53,31 +53,9 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-  body {
-    font-family: 'Baloo 2', system-ui, -apple-system, sans-serif;
-    background: var(--color-bg-dark);
-    color: #ffffff;
-    min-height: 100vh;
-    min-height: 100dvh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    overflow: hidden;
-    user-select: none;
-  }
+  body { font-family: 'Baloo 2', system-ui, -apple-system, sans-serif; background: var(--color-bg-dark); color: #ffffff; min-height: 100vh; min-height: 100dvh; display: flex; justify-content: center; align-items: flex-start; overflow: hidden; user-select: none; }
 
-  .app-window {
-    width: 100%;
-    max-width: 430px;
-    height: 100vh;
-    height: 100dvh;
-    background: var(--color-bg-light);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-    overflow: hidden;
-  }
+  .app-window { width: 100%; max-width: 430px; height: 100vh; height: 100dvh; background: var(--color-bg-light); position: relative; display: flex; flex-direction: column; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4); overflow: hidden; }
 
   @media (min-width: 480px) {
     body { align-items: center; }
@@ -104,28 +82,41 @@
   .cover-ring { position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; border: 2px dashed var(--color-orange-dark); border-radius: 24px; animation: rotateRing 25s linear infinite; transition: box-shadow 0.3s ease; }
   .cover-ring.playing { animation: rotateRing 25s linear infinite, glowPulse 2s ease-in-out infinite; }
   .main-cover { width: 100%; height: 100%; border-radius: 18px; object-fit: cover; box-shadow: 0 8px 24px rgba(0,0,0,0.25); background: var(--color-bg-dark); }
-
   .track-meta { text-align: center; width: 100%; margin-bottom: 5px; }
-  .track-title { font-size: 1.35rem; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .track-title { font-size: 1.35rem; font-weight: 700; color: #ffffff; margin-bottom: 2px; text-shadow: 0 1px 2px rgba(0,0,0,0.15); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .track-artist { font-size: 1.05rem; color: var(--color-text-dark); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
   .controls-card { width: 100%; background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: var(--glass-blur); border-radius: 24px; padding: 16px 14px; display: flex; flex-direction: column; gap: 14px; }
   .player-row { display: flex; align-items: center; justify-content: center; gap: 28px; }
-  .btn-play { background: #ffffff; border: none; color: var(--color-bg-dark); width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; cursor: pointer; transition: all 0.2s ease; }
+  .btn-secondary { background: rgba(255, 255, 255, 0.2); border: 1px solid var(--glass-border); color: #ffffff; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; cursor: pointer; transition: all 0.2s ease; }
+  .btn-secondary:active { transform: scale(0.9); }
+  .btn-play { background: #ffffff; border: none; color: var(--color-bg-dark); width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; cursor: pointer; box-shadow: 0 6px 15px rgba(0,0,0,0.12); transition: all 0.2s ease; }
   .btn-play:active { transform: scale(0.92); }
-
-  .volume-row { display: flex; align-items: center; gap: 12px; width: 100%; padding: 0 4px; }
+  .volume-row { display: flex; align-items: center; gap: 12px; width: 100%; padding: 0 4px; margin-bottom: 4px; }
   .volume-slider { flex: 1; -webkit-appearance: none; height: 5px; border-radius: 3px; background: rgba(255, 255, 255, 0.3); outline: none; }
-  
+  .volume-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #ffffff; cursor: pointer; }
   .action-buttons-vertical { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-  .btn-linktree, .btn-share { width: 100%; border: none; padding: 11px; border-radius: 20px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; transition: all 0.2s ease; }
-  .btn-linktree { background: rgba(229, 129, 67, 0.85); color: #ffffff; }
-  .btn-share { background: rgba(207, 47, 59, 0.85); color: #ffffff; }
-
+  .btn-linktree { width: 100%; background: rgba(229, 129, 67, 0.85); color: #ffffff; border: none; padding: 11px; border-radius: 20px; font-family: 'Baloo 2', sans-serif; font-size: 0.9rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; box-shadow: 0 4px 10px rgba(229, 129, 67, 0.15); transition: all 0.2s ease; }
+  .btn-share { width: 100%; background: rgba(207, 47, 59, 0.85); color: #ffffff; border: none; padding: 11px; border-radius: 20px; font-family: 'Baloo 2', sans-serif; font-size: 0.9rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 10px rgba(207, 47, 59, 0.15); transition: all 0.2s ease; }
+  .toast { position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(10px); background: var(--color-bg-dark); border: 1px solid var(--glass-border); color: white; padding: 8px 18px; border-radius: 20px; font-size: 0.85rem; z-index: 1000; opacity: 0; pointer-events: none; transition: all 200ms ease; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .screen-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 12px; color: #ffffff; border-bottom: 2px solid var(--glass-border); padding-bottom: 4px; }
+  .recent-item, .top-item { display: flex; align-items: center; background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 10px 14px; border-radius: 14px; gap: 12px; margin-bottom: 8px; }
+  .recent-cover { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; background: var(--color-bg-dark); }
+  .recent-title { font-size: 1rem; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .recent-artist { font-size: 0.85rem; color: var(--color-bg-dark); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .top-rank { width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; color: #ffffff; }
+  .top-rank.gold { background: #ffd700; color: #1e1f1e; }
+  .top-rank.silver { background: #c0c0c0; color: #1e1f1e; }
+  .top-rank.bronze { background: #cd7f32; color: #1e1f1e; }
+  .about-banner { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 18px; text-align: center; margin-bottom: 14px; }
+  .about-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 14px; }
+  .about-badge { background: rgba(255, 255, 255, 0.25); border: 1px solid var(--glass-border); border-radius: 16px; padding: 14px; text-align: center; }
+  .about-btn-backstage, .about-btn-web { width: 100%; border: none; padding: 12px; border-radius: 20px; font-family: 'Baloo 2', sans-serif; font-size: 0.95rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; text-decoration: none; transition: all 0.2s ease; }
+  .about-btn-backstage { background: var(--color-bg-dark); color: #ffffff; }
+  .about-btn-web { background: var(--color-primary); color: #ffffff; }
   .bottom-nav { position: absolute; bottom: 0; left: 0; right: 0; height: 65px; background: var(--color-bg-dark); border-top: 2px solid var(--glass-border); display: flex; justify-content: space-around; align-items: center; z-index: 100; }
-  .nav-item { display: flex; flex-direction: column; align-items: center; color: rgba(255, 255, 255, 0.6); cursor: pointer; }
+  .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: rgba(255, 255, 255, 0.6); text-decoration: none; width: 25%; height: 100%; cursor: pointer; }
   .nav-item.active { color: var(--color-orange); }
-
   @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.25); opacity: 0.6; } 100% { transform: scale(1); opacity: 1; } }
   @keyframes rotateRing { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   @keyframes glowPulse { 0% { box-shadow: 0 0 12px rgba(229, 129, 67, 0.4); } 50% { box-shadow: 0 0 28px rgba(229, 129, 67, 0.85); } 100% { box-shadow: 0 0 12px rgba(229, 129, 67, 0.4); } }
@@ -134,58 +125,46 @@
 <body>
   <div class="app-window">
     <header class="top-header">
-      <div class="brand">
-        <img class="logo-img" src="icon_fond_fonce.png" alt="KFM">
-        <div class="brand-text"><h1>KFM Radio</h1><p>K-POP YOUR LIFE!</p></div>
-      </div>
+      <div class="brand"><img class="logo-img" src="icon_fond_fonce.png" alt="KFM"><div class="brand-text"><h1>KFM Radio</h1><p>K-POP YOUR LIFE!</p></div></div>
       <div class="live-badge"><div class="live-dot"></div><span>LIVE</span></div>
     </header>
-
+    <div class="toast" id="app-toast">Thanks for the love! ♥</div>
     <main class="main-container">
       <section class="screen active" id="s-player">
         <div class="cover-wrapper"><div class="cover-ring" id="ring-element"></div><img class="main-cover" id="ctrl-cover" src="icon_fond_fonce.png"></div>
         <div class="track-meta"><div class="track-title" id="ctrl-title">KFM Radio</div><div class="track-artist" id="ctrl-artist">K-POP YOUR LIFE!</div></div>
         <div class="controls-card">
           <div class="player-row">
+            <button class="btn-secondary" onclick="sendVote(-1)"><i class="fa-regular fa-thumbs-down"></i></button>
             <button class="btn-play" onclick="togglePlay()"><i class="fa-solid fa-play" id="play-icon"></i></button>
+            <button class="btn-secondary" onclick="sendVote(1)"><i class="fa-regular fa-heart"></i></button>
           </div>
-          <div class="volume-row">
-            <input type="range" class="volume-slider" id="volume-ctrl" min="0" max="1" step="0.01" value="0.8" oninput="setVolume(this.value)">
-          </div>
+          <div class="volume-row"><i class="fa-solid fa-volume-low" style="font-size:0.75rem;"></i><input type="range" class="volume-slider" id="volume-ctrl" min="0" max="1" step="0.01" value="0.8" oninput="setVolume(this.value)"><i class="fa-solid fa-volume-high" style="font-size:0.75rem;"></i></div>
           <div class="action-buttons-vertical">
-            <a class="btn-linktree" href="https://linktr.ee/kfmkpopyourlife" target="_blank">Join Community</a>
-            <button class="btn-share" onclick="triggerNativeShare()">Share</button>
+            <a class="btn-linktree" href="https://linktr.ee/kfmkpopyourlife" target="_blank"><i class="fa-solid fa-heart-pulse"></i> Join Our K-Pop Community</a>
+            <button class="btn-share" onclick="triggerNativeShare()"><i class="fa-solid fa-share-nodes"></i> Share with K-Pop Friends</button>
           </div>
         </div>
       </section>
+      <section class="screen" id="s-recently"><div class="screen-title">Recently Played</div><div class="recent-list" id="recent-container"></div></section>
+      <section class="screen" id="s-top"><div class="screen-title">Top Tracks</div><div class="top-list" id="top-container"></div></section>
+      <section class="screen" id="s-about"><div class="screen-title">About KFM Radio</div><div class="about-banner"><h2>Where the K-Pop beats never stop!</h2><p>KFM Radio is a free 24/7 K-Pop webradio based in Switzerland.</p></div><div class="about-grid"><div class="about-badge"><h3>24/7</h3><p>Broadcast</p></div><div class="about-badge"><h3>🇨🇭</h3><p>Switzerland</p></div></div><a class="about-btn-backstage" href="https://kfm-radio.com/k-backstage" target="_blank">Our Interviews</a><a class="about-btn-web" href="https://kfm-radio.com" target="_blank">Visit Website</a></section>
     </main>
-
     <nav class="bottom-nav">
       <div class="nav-item active" onclick="switchTab('player', this)"><i class="fa-solid fa-compact-disc"></i><span>Player</span></div>
+      <div class="nav-item" onclick="switchTab('recently', this)"><i class="fa-solid fa-history"></i><span>History</span></div>
+      <div class="nav-item" onclick="switchTab('top', this)"><i class="fa-solid fa-ranking-star"></i><span>Top</span></div>
       <div class="nav-item" onclick="switchTab('about', this)"><i class="fa-solid fa-circle-info"></i><span>About</span></div>
     </nav>
   </div>
-
   <script>
-    let audioStream = null;
-    let isPlaying = false;
-
-    function togglePlay() {
-      if (!audioStream) {
-        audioStream = new Audio("https://play.radioking.io/kfmkpopyourlife");
-        audioStream.volume = 0.8;
-      }
-      const icon = document.getElementById('play-icon');
-      if (!isPlaying) {
-        audioStream.play().then(() => { isPlaying = true; icon.className = "fa-solid fa-pause"; });
-      } else {
-        audioStream.pause(); isPlaying = false; icon.className = "fa-solid fa-play";
-      }
-    }
-
+    let audioStream = null; let isPlaying = false;
+    function initAudio() { if (!audioStream) { audioStream = new Audio("https://play.radioking.io/kfmkpopyourlife"); audioStream.volume = 0.8; } }
+    function togglePlay() { initAudio(); const icon = document.getElementById('play-icon'); const ring = document.getElementById('ring-element'); if (!isPlaying) { audioStream.play().then(() => { isPlaying = true; icon.className = "fa-solid fa-pause"; ring.classList.add('playing'); }); } else { audioStream.pause(); isPlaying = false; icon.className = "fa-solid fa-play"; ring.classList.remove('playing'); } }
     function setVolume(val) { if (audioStream) audioStream.volume = val; }
+    function switchTab(screenId, navBtn) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active')); document.getElementById('s-' + screenId).classList.add('active'); navBtn.classList.add('active'); }
     function triggerNativeShare() { if (navigator.share) navigator.share({title: 'KFM Radio', url: 'https://kfm-radio.com'}); }
-    function switchTab(screenId, btn) { /* Logique simple de navigation */ }
+    function sendVote(v) { document.getElementById('app-toast').classList.add('show'); setTimeout(() => document.getElementById('app-toast').classList.remove('show'), 2000); }
   </script>
 </body>
 </html>
