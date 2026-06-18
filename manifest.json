@@ -2,7 +2,7 @@
   "name": "KFM Radio",
   "short_name": "KFM Radio",
   "description": "K-Pop Your Life! Free 24/7 K-Pop webradio from Switzerland.",
-  "start_url": "/kfm-radio/",
+  "start_url": "/kfm-radio/?utm_source=pwa_app&utm_medium=homescreen",
   "scope": "/kfm-radio/",
   "display": "standalone",
   "orientation": "portrait",
