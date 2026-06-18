@@ -24,24 +24,12 @@
   gtag('config','G-WYVKVN6LBV');
 </script>
 
-<!-- Connexion et Initialisation de OneSignal Push Notifications (Version 15 Stable) -->
-<script src="https://cdn.onesignal.com/sdks/web/v15/OneSignalSDK.js" defer></script>
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
-  window.OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
       appId: "5709860f-2eab-4f03-9fb1-99715da05b17",
-      path: "./",
-      notifyButton: {
-        enable: true,
-        size: 'medium',
-        theme: 'default',
-        position: 'bottom-right',
-        offset: {
-          bottom: '85px',
-          right: '20px'
-        }
-      }
     });
   });
 </script>
@@ -912,69 +900,4 @@
         .then(res => res.json())
         .then(data => {
           if(!data || data.length === 0) {
-            container.innerHTML = `<div style="text-align:center;color:white;padding:20px;">No history available.</div>`;
-            return;
-          }
-          container.innerHTML = data.map(item => `
-            <div class="recent-item">
-              <img class="recent-cover" src="${item.cover || LOGO_SRC}" onerror="this.src='${FALLBACK_COVER}'">
-              <div class="recent-info">
-                <div class="recent-title">${item.title}</div>
-                <div class="recent-artist">${item.artist}</div>
-              </div>
-            </div>
-          `).join('');
-        })
-        .catch(() => {
-          container.innerHTML = `<div style="text-align:center;color:white;padding:20px;">Unable to load history.</div>`;
-        });
-    }
-
-    function fetchTopTracks() {
-      const container = document.getElementById('top-container');
-      fetch(TOP_URL)
-        .then(res => {
-          if (!res.ok) throw new Error();
-          return res.json();
-        })
-        .then(data => {
-          if(!data || data.length === 0) throw new Error();
-          container.innerHTML = data.map((item, idx) => {
-            let rankClass = "";
-            if(idx === 0) rankClass = "gold";
-            else if(idx === 1) rankClass = "silver";
-            else if(idx === 2) rankClass = "bronze";
-            
-            return `
-              <div class="top-item">
-                <div class="top-rank ${rankClass}">${idx + 1}</div>
-                <img class="recent-cover" src="${item.cover || LOGO_SRC}" onerror="this.src='${FALLBACK_COVER}'">
-                <div class="recent-info">
-                  <div class="recent-title">${item.title}</div>
-                  <div class="recent-artist">${item.artist}</div>
-                </div>
-              </div>
-            `;
-          }).join('');
-        })
-        .catch(() => {
-          container.innerHTML = `
-            <div style="text-align:center; padding:30px 10px; color:white; background:var(--glass-bg); border-radius:20px; border:1px solid var(--glass-border);">
-              <i class="fa-solid fa-ranking-star" style="font-size:2.5rem; margin-bottom:12px; color:var(--color-orange);"></i>
-              <h3 style="font-size:1.15rem; margin-bottom:6px;">Weekly Voting App Coming Soon!</h3>
-              <p style="font-size:0.85rem; line-height:1.4; color:rgba(255,255,255,0.9); margin-bottom:14px;">
-                Our official interactive dynamic chart module is currently undergoing an API upgrade.
-              </p>
-              <a href="https://kfm-radio.com" target="_blank" style="display:inline-block; background:var(--color-bg-dark); color:white; text-decoration:none; padding:8px 16px; border-radius:20px; font-size:0.8; font-weight:700;">
-                Check Updates Website
-              </a>
-            </div>
-          `;
-        });
-    }
-
-    updateMetadata();
-    metaInterval = setInterval(updateMetadata, 15000);
-  </script>
-</body>
-</html>
+            container.innerHTML = `<div
