@@ -24,6 +24,20 @@
   gtag('config','G-WYVKVN6LBV');
 </script>
 
+<!-- Connexion et Initialisation de OneSignal Push Notifications -->
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "5709860f-2eab-4f03-9fb1-99715da05b17",
+      notifyButton: {
+        enable: true,
+      },
+    });
+  });
+</script>
+
 <title>KFM Radio — K-Pop Your Life!</title>
 
 <style>
@@ -204,7 +218,6 @@
     transition: box-shadow 0.3s ease;
   }
 
-  /* EFFET GLOW QUANT LE LECTEUR EST ACTIF */
   .cover-ring.playing {
     animation: rotateRing 25s linear infinite, glowPulse 2s ease-in-out infinite;
   }
@@ -641,7 +654,6 @@
     to { transform: rotate(360deg); }
   }
 
-  /* KEYFRAME DU HALO LUMINEUX SANS GLISSEMENT DE BLOC */
   @keyframes glowPulse {
     0% { box-shadow: 0 0 12px rgba(229, 129, 67, 0.4); }
     50% { box-shadow: 0 0 28px rgba(229, 129, 67, 0.85); }
