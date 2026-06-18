@@ -1,4 +1,74 @@
 <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>KFM Radio</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background-color: #f0f0f0; }
+        .screen { display: none; }
+        .active { display: block; }
+        .container { background: white; padding: 20px; border-radius: 10px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <button onclick="switchTab('Player', this)">Player</button>
+        <button onclick="switchTab('History', this)">History</button>
+        <button onclick="switchTab('Top', this)">Top Tracks</button>
+    </nav>
+
+    <div id="s-Player" class="screen active">
+        <h1>Player</h1>
+        <div class="container">
+            <h2 id="ctrl-title">Chargement...</h2>
+            <p id="ctrl-artist"></p>
+            <button onclick="togglePlay()">Play / Pause</button>
+        </div>
+    </div>
+
+    <div id="s-History" class="screen">
+        <h1>Recently Played</h1>
+        <div id="history-list" class="container">
+            <script src="https://www.radioking.io/widgets/api/v1/radio/kfmkpopyourlife/track/historic/recent"></script>
+        </div>
+    </div>
+
+    <div id="s-Top" class="screen">
+        <h1>Top Tracks</h1>
+        <div id="top-list" class="container">
+            <script src="https://www.radioking.io/widgets/api/v1/radio/kfmkpopyourlife/track/top/week"></script>
+        </div>
+    </div>
+
+    <script>
+        // Logique du lecteur
+        let audioStream = new Audio("https://play.radioking.io/kfmkpopyourlife");
+        
+        function togglePlay() {
+            audioStream.paused ? audioStream.play() : audioStream.pause();
+        }
+
+        // Navigation
+        function switchTab(screenId, btn) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('s-' + screenId).classList.add('active');
+        }
+
+        // Mise à jour titre direct
+        function updateMetadata() {
+            fetch("https://api.radioking.io/widget/radio/kfmkpopyourlife/track/current")
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('ctrl-title').innerText = data.title;
+                    document.getElementById('ctrl-artist').innerText = data.artist;
+                });
+        }
+        setInterval(updateMetadata, 30000);
+        updateMetadata();
+    </script>
+</body>
+</html><!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
