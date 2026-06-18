@@ -24,12 +24,12 @@
   gtag('config','G-WYVKVN6LBV');
 </script>
 
-<!-- Connexion et Initialisation de OneSignal Push Notifications -->
+<!-- Connexion et Initialisation de OneSignal Push Notifications (Syntaxe v16 corrigée) -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
-  window.OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
       appId: "5709860f-2eab-4f03-9fb1-99715da05b17",
       serviceWorkerPath: "sw.js",
       serviceWorkerParam: { scope: "/" },
