@@ -31,6 +31,8 @@
   OneSignal.push(function() {
     OneSignal.init({
       appId: "5709860f-2eab-4f03-9fb1-99715da05b17",
+      serviceWorkerPath: "sw.js",
+      serviceWorkerParam: { scope: "/" },
       notifyButton: {
         enable: true,
       },
