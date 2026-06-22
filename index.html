@@ -203,7 +203,7 @@
   }
 
   .cover-ring.playing {
-    box-shadow: 0 0 15px rgba(209, 112, 65, 0.4);
+    animation: rotateRing 25s linear infinite, pulseGlow 2.2s ease-in-out infinite;
   }
 
   .main-cover {
@@ -221,7 +221,7 @@
   }
 
   .track-title {
-    font-size: 1.35rem;
+    font-size: 1.55rem;
     font-weight: 700;
     color: #ffffff;
     margin-bottom: 0px;
@@ -232,30 +232,12 @@
   }
 
   .track-artist {
-    font-size: 1.05rem;
+    font-size: 1.2rem;
     color: var(--color-text-dark);
     font-weight: 700;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-
-  .eq-container {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 4px;
-    height: 24px;
-    width: 100%;
-    margin-bottom: 2px;
-  }
-
-  .eq-bar {
-    width: 3px;
-    height: 3px;
-    background: var(--color-skin);
-    border-radius: 2px;
-    transition: height 0.1s ease;
   }
 
   .controls-card {
@@ -655,6 +637,11 @@
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
+
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 10px rgba(209, 112, 65, 0.35); }
+    50% { box-shadow: 0 0 22px rgba(209, 112, 65, 0.7); }
+  }
 </style>
 </head>
 <body>
@@ -688,11 +675,6 @@
         <div class="track-meta">
           <div class="track-title" id="ctrl-title">KFM Radio</div>
           <div class="track-artist" id="ctrl-artist">K-POP YOUR LIFE!</div>
-        </div>
-
-        <div class="eq-container" id="eq-box">
-          <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-          <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
         </div>
 
         <div class="controls-card">
@@ -813,7 +795,6 @@
     let audioStream = null;
     let isPlaying = false;
     let metaInterval = null;
-    let eqInterval = null;
 
     function initAudio() {
       if (!audioStream) {
@@ -835,7 +816,6 @@
             isPlaying = true;
             icon.className = "fa-solid fa-pause";
             ring.classList.add('playing');
-            startEqualizer();
           })
           .catch(err => console.log("Playback failed:", err));
       } else {
@@ -843,32 +823,11 @@
         isPlaying = false;
         icon.className = "fa-solid fa-play";
         ring.classList.remove('playing');
-        stopEqualizer();
       }
     }
 
     function setVolume(val) {
       if (audioStream) audioStream.volume = parseFloat(val);
-    }
-
-    function startEqualizer() {
-      const bars = document.querySelectorAll('.eq-bar');
-      if(eqInterval) clearInterval(eqInterval);
-      eqInterval = setInterval(() => {
-        bars.forEach(bar => {
-          if (isPlaying) {
-            const h = Math.floor(Math.random() * 20) + 4;
-            bar.style.height = h + 'px';
-          } else {
-            bar.style.height = '3px';
-          }
-        });
-      }, 120);
-    }
-
-    function stopEqualizer() {
-      clearInterval(eqInterval);
-      document.querySelectorAll('.eq-bar').forEach(b => b.style.height = '3px');
     }
 
     function showToast(msg) {
