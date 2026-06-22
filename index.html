@@ -180,15 +180,14 @@
     justify-content: space-between;
     height: 100%;
     flex: 1;
-    gap: 16px;
-    padding: 10px 0;
+    gap: 12px;
   }
 
   .cover-wrapper {
     position: relative;
-    width: 185px; 
-    height: 185px;
-    margin: 10px auto;
+    width: 175px; 
+    height: 175px;
+    margin: 5px auto;
     flex-shrink: 0;
   }
 
@@ -201,12 +200,10 @@
     border: 2px dashed var(--color-orange-dark);
     border-radius: 24px;
     animation: rotateRing 25s linear infinite;
-    transition: box-shadow 0.3s ease;
   }
 
-  /* EFFET GLOW QUANT LE LECTEUR EST ACTIF */
   .cover-ring.playing {
-    animation: rotateRing 25s linear infinite, glowPulse 2s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(209, 112, 65, 0.4);
   }
 
   .main-cover {
@@ -221,14 +218,13 @@
   .track-meta {
     text-align: center;
     width: 100%;
-    margin-bottom: 5px;
   }
 
   .track-title {
     font-size: 1.35rem;
     font-weight: 700;
     color: #ffffff;
-    margin-bottom: 2px;
+    margin-bottom: 0px;
     text-shadow: 0 1px 2px rgba(0,0,0,0.15);
     white-space: nowrap;
     overflow: hidden;
@@ -242,6 +238,24 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  .eq-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    height: 24px;
+    width: 100%;
+    margin-bottom: 2px;
+  }
+
+  .eq-bar {
+    width: 3px;
+    height: 3px;
+    background: var(--color-skin);
+    border-radius: 2px;
+    transition: height 0.1s ease;
   }
 
   .controls-card {
@@ -336,6 +350,7 @@
     cursor: pointer;
   }
 
+  /* BOUTONS ACTIONS VERTICAUX CORRIGÉS (PLUS DOUX & TRANSPARENTS) */
   .action-buttons-vertical {
     display: flex;
     flex-direction: column;
@@ -345,7 +360,7 @@
 
   .btn-linktree {
     width: 100%;
-    background: rgba(229, 129, 67, 0.85);
+    background: rgba(229, 129, 67, 0.85); /* Version translucide de --color-orange */
     color: #ffffff;
     border: none;
     padding: 11px;
@@ -365,7 +380,7 @@
 
   .btn-share {
     width: 100%;
-    background: rgba(207, 47, 59, 0.85);
+    background: rgba(207, 47, 59, 0.85); /* Version translucide de --color-primary */
     color: #ffffff;
     border: none;
     padding: 11px;
@@ -640,13 +655,6 @@
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
-
-  /* KEYFRAME DU HALO LUMINEUX SANS GLISSEMENT DE BLOC */
-  @keyframes glowPulse {
-    0% { box-shadow: 0 0 12px rgba(229, 129, 67, 0.4); }
-    50% { box-shadow: 0 0 28px rgba(229, 129, 67, 0.85); }
-    100% { box-shadow: 0 0 12px rgba(229, 129, 67, 0.4); }
-  }
 </style>
 </head>
 <body>
@@ -682,6 +690,11 @@
           <div class="track-artist" id="ctrl-artist">K-POP YOUR LIFE!</div>
         </div>
 
+        <div class="eq-container" id="eq-box">
+          <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+          <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+        </div>
+
         <div class="controls-card">
           <div class="player-row">
             <button class="btn-secondary" onclick="sendVote(-1)">
@@ -703,6 +716,7 @@
             <i class="fa-solid fa-volume-high" style="font-size:0.75rem; color:rgba(255,255,255,0.7);"></i>
           </div>
 
+          <!-- SECTION DES ACTION BUTTONS RE-AJUSTÉE -->
           <div class="action-buttons-vertical">
             <a class="btn-linktree" href="https://linktr.ee/kfmkpopyourlife" target="_blank" rel="noopener">
               <i class="fa-solid fa-heart-pulse"></i> Join Our K-Pop Community
@@ -799,6 +813,7 @@
     let audioStream = null;
     let isPlaying = false;
     let metaInterval = null;
+    let eqInterval = null;
 
     function initAudio() {
       if (!audioStream) {
@@ -820,6 +835,7 @@
             isPlaying = true;
             icon.className = "fa-solid fa-pause";
             ring.classList.add('playing');
+            startEqualizer();
           })
           .catch(err => console.log("Playback failed:", err));
       } else {
@@ -827,11 +843,32 @@
         isPlaying = false;
         icon.className = "fa-solid fa-play";
         ring.classList.remove('playing');
+        stopEqualizer();
       }
     }
 
     function setVolume(val) {
       if (audioStream) audioStream.volume = parseFloat(val);
+    }
+
+    function startEqualizer() {
+      const bars = document.querySelectorAll('.eq-bar');
+      if(eqInterval) clearInterval(eqInterval);
+      eqInterval = setInterval(() => {
+        bars.forEach(bar => {
+          if (isPlaying) {
+            const h = Math.floor(Math.random() * 20) + 4;
+            bar.style.height = h + 'px';
+          } else {
+            bar.style.height = '3px';
+          }
+        });
+      }, 120);
+    }
+
+    function stopEqualizer() {
+      clearInterval(eqInterval);
+      document.querySelectorAll('.eq-bar').forEach(b => b.style.height = '3px');
     }
 
     function showToast(msg) {
@@ -841,8 +878,21 @@
       setTimeout(() => t.classList.remove('show'), 2500);
     }
 
+    const VOTE_URL = "https://www.radioking.com/api/radio/717731/track/vote";
+
     function sendVote(type) {
-      showToast(type > 0 ? "Added to your favorites! ❤️" : "Vote registered! 👍");
+      fetch(VOTE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ vote: type })
+      })
+        .then(res => {
+          if (!res.ok) throw new Error();
+          showToast(type > 0 ? "Added to your favorites! ❤️" : "Vote registered! 👍");
+        })
+        .catch(() => {
+          showToast("Vote couldn't be sent, try again");
+        });
     }
 
     function triggerNativeShare() {
@@ -897,7 +947,7 @@
           }
           container.innerHTML = data.map(item => `
             <div class="recent-item">
-              <img class="recent-cover" src="${item.cover || LOGO_SRC}" onerror="this.src='${FALLBACK_COVER}'">
+              <img class="recent-cover" src="${item.cover_url || LOGO_SRC}" onerror="this.src='${FALLBACK_COVER}'">
               <div class="recent-info">
                 <div class="recent-title">${item.title}</div>
                 <div class="recent-artist">${item.artist}</div>
@@ -928,7 +978,7 @@
             return `
               <div class="top-item">
                 <div class="top-rank ${rankClass}">${idx + 1}</div>
-                <img class="recent-cover" src="${item.cover || LOGO_SRC}" onerror="this.src='${FALLBACK_COVER}'">
+                <img class="recent-cover" src="${item.cover_url || LOGO_SRC}" onerror="this.src='${FALLBACK_COVER}'">
                 <div class="recent-info">
                   <div class="recent-title">${item.title}</div>
                   <div class="recent-artist">${item.artist}</div>
