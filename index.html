@@ -837,21 +837,20 @@
       setTimeout(() => t.classList.remove('show'), 2500);
     }
 
-    const VOTE_URL = "https://www.radioking.com/api/radio/717731/track/vote";
+    const VOTE_URL = "https://script.google.com/macros/s/AKfycbxwxQioxwmE38LUCTMUDEp2OxkSGPmmDFSdaEeu3nU6ZOOxwMdp3UpNHg7o7jPGk3gn5g/exec";
 
     function sendVote(type) {
+      const title = document.getElementById('ctrl-title').innerText;
+      const artist = document.getElementById('ctrl-artist').innerText;
+
       fetch(VOTE_URL, {
         method: "POST",
+        mode: "no-cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ vote: type })
-      })
-        .then(res => {
-          if (!res.ok) throw new Error();
-          showToast(type > 0 ? "Added to your favorites! ❤️" : "Vote registered! 👍");
-        })
-        .catch(() => {
-          showToast("Vote couldn't be sent, try again");
-        });
+        body: JSON.stringify({ title: title, artist: artist, vote: type })
+      });
+
+      showToast(type > 0 ? "Added to your favorites! ❤️" : "Vote registered! 👍");
     }
 
     function triggerNativeShare() {
